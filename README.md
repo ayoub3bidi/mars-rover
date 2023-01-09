@@ -1,5 +1,9 @@
 # Mars Rover
-A simple web application that displays a list of images from the Mars Curiosity rover and allows users to view the full-size version of each image.
+A simple web application that displays a list of images from the Mars Curiosity rover and allows users to view the full-size version of each image. 
+
+## Setup  
+* Go to [https://api.nasa.gov](https://api.nasa.gov) and get your API key.  
+* In the `src` folder you will find `.env.example`, change it to `.env` and give `MARS_API_KEY` your API key. 
 
 ## Available Scripts
 

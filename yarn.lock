@@ -648,6 +648,11 @@ json5@^2.2.2:
   resolved "https://registry.yarnpkg.com/json5/-/json5-2.2.3.tgz#78cd6f1a19bdc12b73db5ad0c61efd66c1e29283"
   integrity sha512-XmOWe7eyHYH14cLdVPoyg+GOH3rYX++KpzrylJwSW98t3Nk+U8XOl8FWKOgwtzdb8lXGf6zYwDUzeHMWfxasyg==
 
+ky@0.20.0:
+  version "0.20.0"
+  resolved "https://registry.yarnpkg.com/ky/-/ky-0.20.0.tgz#4cebcd208f2d0d0b5970a63523afecfd79bd9e46"
+  integrity sha512-JAfwtwj+t7WqRus88PfBj25aAjRQUgMhk7aB2ufjQ6v8faoNwMy02mfSQ0iNXWCbJGcSl2JZ5ckaiywRjbq0Uw==
+
 loose-envify@^1.0.0, loose-envify@^1.1.0, loose-envify@^1.4.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/loose-envify/-/loose-envify-1.4.0.tgz#71ee51fa7be4caec1a63839f7e682d8132d30caf"
@@ -724,6 +729,11 @@ prop-types@^15.6.2, prop-types@^15.8.1:
     loose-envify "^1.4.0"
     object-assign "^4.1.1"
     react-is "^16.13.1"
+
+qs@6.9.3:
+  version "6.9.3"
+  resolved "https://registry.yarnpkg.com/qs/-/qs-6.9.3.tgz#bfadcd296c2d549f1dffa560619132c977f5008e"
+  integrity sha512-EbZYNarm6138UKKq46tdx08Yo/q9ZhFoAXAI1meAFd2GtbRDhbZY2WQSICskT0c5q99aFzLG1D4nvTk9tqfXIw==
 
 react-bootstrap@^2.7.0:
   version "2.7.0"

@@ -1,68 +1,55 @@
-import axios from "axios";
-import useAxios from "axios-hooks";
-import { useEffect, useState } from "react"
-import {
-  Card,
-  Col,
-  Container,
-  Modal,
-  Row,
-  Stack,
-} from "react-bootstrap"
+import { useState } from "react";
+import { Container, Nav, Navbar, Row } from "react-bootstrap";
+import DataModal from "./components/DataModal";
+import ImageCard from "./components/ImageCard";
 
 export function Home({}) {
-  const [modal, setModal] = useState(false)
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
-  // ? axios hooks method
-  const [{ data, loading, error}, refetch] = useAxios("https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=100&api_key=haqV5FjexA2U1yByd7begfVd4s8vvmhZywGmQ7W1")
-  
-  //? classic method
-  // const [photos, setPhotos] = useState([]);
-  // const getPhotos = async () => {
-  //   const { photos } =  await axios.get("https://api.nasa.gov/planetary/apod?api_key=haqV5FjexA2U1yByd7begfVd4s8vvmhZywGmQ7W1")
-  //   setPhotos(photos)
-  // }
+  // const [{ data, loading, error}, refetch] = useAxios("https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=100&page=1&api_key=haqV5FjexA2U1yByd7begfVd4s8vvmhZywGmQ7W1")
 
-  // useEffect(() => {
-  //   getPhotos();
-  // }, [])
-
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error!</p>;
+  // if (loading) return <p>Loading...</p>;
+  // if (error) return <p>Error!</p>;
 
   return (
+    <>
+    <Navbar sticky="top" bg="dark" variant="dark">
+        <Container>
+          <Navbar.Brand href="/">
+            <img
+              src="../public/mars.ico"
+              width="30"
+              height="30"
+              className="d-inline-block align-top"
+              alt="Mars logo"
+            />{' '}
+            Mars Rover
+          </Navbar.Brand>
+          <Nav className="me-auto">
+          </Nav>
+        </Container>
+      </Navbar>
     <Container>
-      <Row className="align-items-center mb-4">
-        <Col>
-          <h1>Mars Rover</h1>
-        </Col>
+      <Row className="g-3 mt-4">
+        <ImageCard
+          handleShow={handleShow}
+          earth_date="2022-11-11"
+          img_src="http://mars.jpl.nasa.gov/msl-raw-images/proj/msl/redops/ods/surface/sol/00100/opgs/edr/fcam/FRA_406374643EDR_F0050178FHAZ00301M_.JPG"
+        />
       </Row>
-      <div>{JSON.stringify(data)}</div>
-      {/* <Row xs={1} sm={2} lg={3} xl={4} className="g-3">
-        {JSON.stringify(data).map(photo => (
-          <Col key={photo.id}>
-            <ImageCard date={photo.earth_date} image={photo.img_src} onClick={() => setModal(true)} />
-          </Col>
-        ))}
-      </Row> */}
+      <DataModal
+        show={show}
+        handleClose={handleClose}
+        photoId="21"
+        img_src="http://mars.jpl.nasa.gov/msl-raw-images/proj/msl/redops/ods/surface/sol/00100/opgs/edr/fcam/FRA_406374643EDR_F0050178FHAZ00301M_.JPG"
+        cameraName="qdsfqsdf"
+        landing_date="2022-11-11"
+        launch_date="2022-11-11"
+        status="active"
+      />
     </Container>
-  )
-}
-
-function ImageCard({ date, image }) {
-  return (
-    <Card
-      className={`h-100 text-reset text-decoration-none`}
-    >
-      <Card.Body>
-        <Stack
-          gap={2}
-          className="align-items-center justify-content-center h-100"
-        >
-          <span className="fs-5">{date}</span>
-          <img src={image} alt="" />
-        </Stack>
-      </Card.Body>
-    </Card>
+    </>
   )
 }

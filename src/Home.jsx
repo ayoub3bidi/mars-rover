@@ -1,5 +1,6 @@
+import useAxios from "axios-hooks";
 import { useState } from "react";
-import { Container, Nav, Navbar, Row } from "react-bootstrap";
+import { Container, Nav, Navbar, Row, Col } from "react-bootstrap";
 import DataModal from "./components/DataModal";
 import ImageCard from "./components/ImageCard";
 
@@ -8,10 +9,15 @@ export function Home({}) {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  // const [{ data, loading, error}, refetch] = useAxios("https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=100&page=1&api_key=haqV5FjexA2U1yByd7begfVd4s8vvmhZywGmQ7W1")
+  const [sol, setSol] = useState(100);
+  const [page, setPage] = useState(1);
+  const URI = "https://api.nasa.gov/mars-photos/api/v1/rovers"
+  const API_KEY = "haqV5FjexA2U1yByd7begfVd4s8vvmhZywGmQ7W1"
 
-  // if (loading) return <p>Loading...</p>;
-  // if (error) return <p>Error!</p>;
+  const [{ data, loading, error}, refetch] = useAxios(`${URI}/curiosity/photos?sol=${sol}&page=${page}&api_key=${API_KEY}`)
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error!</p>;
 
   return (
     <>
@@ -32,12 +38,16 @@ export function Home({}) {
         </Container>
       </Navbar>
     <Container>
-      <Row className="g-3 mt-4">
-        <ImageCard
-          handleShow={handleShow}
-          earth_date="2022-11-11"
-          img_src="http://mars.jpl.nasa.gov/msl-raw-images/proj/msl/redops/ods/surface/sol/00100/opgs/edr/fcam/FRA_406374643EDR_F0050178FHAZ00301M_.JPG"
-        />
+      <Row xs={1} sm={2} lg={3} xl={4} className="g-3 mt-2">
+      {data.photos.map((photo, index) => (
+            <Col key={index}>
+            <ImageCard 
+              handleShow={handleShow}
+              earth_date={photo.earth_date}
+              img_src={photo.img_src}
+            />
+            </Col>
+        ))}
       </Row>
       <DataModal
         show={show}

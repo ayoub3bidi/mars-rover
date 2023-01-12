@@ -13,6 +13,15 @@ export function Home({}) {
   const [page, setPage] = useState(1);
   const URI = "https://api.nasa.gov/mars-photos/api/v1/rovers"
   const API_KEY = "haqV5FjexA2U1yByd7begfVd4s8vvmhZywGmQ7W1"
+  
+  const [photoIndex, setPhotoIndex] = useState(0);
+  const handleNext = () => setPhotoIndex(photoIndex + 1)
+  const handlePrevious = () => setPhotoIndex(photoIndex - 1)
+
+  const getPhotoIndex = (event, key) => {
+    // console.log('key index: ', key);
+    setPhotoIndex(key);
+  };
 
   const [{ data, loading, error}, refetch] = useAxios(`${URI}/curiosity/photos?sol=${sol}&page=${page}&api_key=${API_KEY}`)
 
@@ -40,7 +49,7 @@ export function Home({}) {
     <Container>
       <Row xs={1} sm={2} lg={3} xl={4} className="g-3 mt-2">
       {data.photos.map((photo, index) => (
-            <Col key={index}>
+            <Col  onClick={event => getPhotoIndex(event, index)} key={index}>
             <ImageCard 
               handleShow={handleShow}
               earth_date={photo.earth_date}
@@ -52,12 +61,10 @@ export function Home({}) {
       <DataModal
         show={show}
         handleClose={handleClose}
-        photoId="21"
-        img_src="http://mars.jpl.nasa.gov/msl-raw-images/proj/msl/redops/ods/surface/sol/00100/opgs/edr/fcam/FRA_406374643EDR_F0050178FHAZ00301M_.JPG"
-        cameraName="qdsfqsdf"
-        landing_date="2022-11-11"
-        launch_date="2022-11-11"
-        status="active"
+        handleNext={handleNext}
+        handlePrevious={handlePrevious}
+        photoIndex={photoIndex}
+        photos={data.photos}
       />
     </Container>
     </>

@@ -18,4 +18,14 @@ This will install all dependencies.
 yarn dev
 ```
 
-Runs the app in the development mode. Open [127.0.0.1:5173](http://127.0.0.1:5173) to view it in your browser. The page will reload when you make changes.
+Runs the app in the development mode. Open [127.0.0.1:5173](http://127.0.0.1:5173) to view it in your browser. The page will reload when you make changes.  
+
+```
+yarn test
+```
+Runs the tests.  
+
+```
+yarn test-ui
+```
+Runs the tests with a graphic interface.
